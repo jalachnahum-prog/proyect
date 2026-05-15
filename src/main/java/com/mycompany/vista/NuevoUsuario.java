@@ -6,14 +6,14 @@ import com.mycompany.bibio.DAOusuariosImpl;
 
 
 public class NuevoUsuario extends javax.swing.JPanel {
-
+    private com.mycompany.modelos.Usuarios usuarioEditar = null;
 
     public NuevoUsuario() {
         initComponents();
     }
     public NuevoUsuario(com.mycompany.modelos.Usuarios usuario){
         initComponents();
-
+        usuarioEditar = usuario;
         nombretxt.setText(usuario.getNombres());
         apellidopadretxt.setText(usuario.getApellido_paterno());
         apellidomadretxt.setText(usuario.getApellido_materno());
@@ -178,25 +178,69 @@ public class NuevoUsuario extends javax.swing.JPanel {
         return;
     }
         
-        com.mycompany.modelos.Usuarios usuario = new com.mycompany.modelos.Usuarios();
-        usuario.setNombres(nombre);
-        usuario.setApellido_paterno(apellidop);
-        usuario.setApellido_materno(apellidom);
-        usuario.setDomicilio(domi);
-        usuario.setTelefono(number);
-        try{
-            DAOusuarios dao = new DAOusuariosImpl();
-            dao.registrar(usuario);
-             javax.swing.JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.\n", "AVISO", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            nombretxt.setText("");
-            apellidopadretxt.setText("");
-            apellidomadretxt.setText("");
-            domiciliotxt.setText("");
-            telefonotxt.setText("");
-        }catch(Exception e){
-             javax.swing.JOptionPane.showMessageDialog(this, "ocurrio un error al registrar el usuario \n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
-            System.out.println(e.getMessage());
-        }
+        com.mycompany.modelos.Usuarios usuario;
+
+// Si estamos editando
+    if(usuarioEditar != null){
+
+        usuario = usuarioEditar;
+
+    }else{
+
+        usuario = new com.mycompany.modelos.Usuarios();
+    }
+
+usuario.setNombres(nombre);
+usuario.setApellido_paterno(apellidop);
+usuario.setApellido_materno(apellidom);
+usuario.setDomicilio(domi);
+usuario.setTelefono(number);
+
+try{
+    DAOusuarios dao = new DAOusuariosImpl();
+
+    // EDITAR
+    if(usuarioEditar != null){
+
+        dao.actualizar(usuario);
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Usuario actualizado exitosamente",
+                "AVISO",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+
+    }else{
+
+        // NUEVO
+        dao.registrar(usuario);
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Usuario registrado exitosamente",
+                "AVISO",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    nombretxt.setText("");
+    apellidopadretxt.setText("");
+    apellidomadretxt.setText("");
+    domiciliotxt.setText("");
+    telefonotxt.setText("");
+
+    }catch(Exception e){
+
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Ocurrió un error",
+            "AVISO",
+            javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+
+    System.out.println(e.getMessage());
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

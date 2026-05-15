@@ -58,8 +58,8 @@
                           <Component id="folio_prestar" max="32767" attributes="0"/>
                           <EmptySpace min="106" pref="106" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="text_folio" alignment="0" max="32767" attributes="0"/>
-                      <Component id="bot_panel_prestar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="text_folio_usuario" alignment="0" max="32767" attributes="0"/>
+                      <Component id="bot_devolver" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="656" max="-2" attributes="0"/>
               </Group>
@@ -73,13 +73,13 @@
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="folio_prestar" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="text_folio" max="32767" attributes="0"/>
+                  <Component id="text_folio_usuario" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="id_libro_prestar" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="text_id_libro" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="bot_panel_prestar" pref="39" max="32767" attributes="0"/>
+                  <Component id="bot_devolver" pref="39" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -104,9 +104,9 @@
             <Property name="text" type="java.lang.String" value="LIBRO ID "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="text_folio">
+        <Component class="javax.swing.JTextField" name="text_folio_usuario">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_folioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_folio_usuarioActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="text_id_libro">
@@ -114,7 +114,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_id_libroActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bot_panel_prestar">
+        <Component class="javax.swing.JButton" name="bot_devolver">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
@@ -131,6 +131,9 @@
               <Color id="Cursor de Mano"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bot_devolverActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -162,5 +162,88 @@ public class DAOusuariosImpl extends Database implements DAOusuarios {
 
     return usuario;
     }
+
+    @Override
+    public void actualizar(Usuarios usuario) throws Exception {
+         try {
+
+            this.conectar();
+
+            PreparedStatement st =
+            this.conexion.prepareStatement(
+                "UPDATE usuarios SET nombres=?, apellido_paterno=?, apellido_materno=?, domicilio=?, telefono=? WHERE id_usuario=?"
+            );
+
+            st.setString(1, usuario.getNombres());
+            st.setString(2, usuario.getApellido_paterno());
+            st.setString(3, usuario.getApellido_materno());
+            st.setString(4, usuario.getDomicilio());
+            st.setString(5, usuario.getTelefono());
+
+            st.setInt(6, usuario.getId_usuario());
+
+            st.executeUpdate();
+
+            st.close();
+
+        } catch(Exception e){
+
+            throw e;
+
+        } finally{
+
+            this.Cerrar();
+        }
+    }
+
+    @Override
+    public List<Usuarios> buscar(String texto) throws Exception {
+        
+    List<Usuarios> lista = new ArrayList<>();
+
+    try{
+
+        this.conectar();
+
+        PreparedStatement st = this.conexion.prepareStatement(
+        "SELECT * FROM usuarios WHERE nombres LIKE ? OR apellido_paterno LIKE ? OR apellido_materno LIKE ?"
+        );
+
+        String busqueda = "%" + texto + "%";
+
+        st.setString(1, busqueda);
+        st.setString(2, busqueda);
+        st.setString(3, busqueda);
+
+        ResultSet rs = st.executeQuery();
+
+        while(rs.next()){
+
+            Usuarios usuario = new Usuarios();
+
+            usuario.setId_usuario(rs.getInt("id_usuario"));
+            usuario.setNombres(rs.getString("nombres"));
+            usuario.setApellido_paterno(rs.getString("apellido_paterno"));
+            usuario.setApellido_materno(rs.getString("apellido_materno"));
+            usuario.setDomicilio(rs.getString("domicilio"));
+            usuario.setTelefono(rs.getString("telefono"));
+
+            lista.add(usuario);
+        }
+
+        rs.close();
+        st.close();
+
+    }catch(Exception e){
+
+        throw e;
+
+    }finally{
+
+        this.Cerrar();
+    }
+
+    return lista;
+    }
     
 }

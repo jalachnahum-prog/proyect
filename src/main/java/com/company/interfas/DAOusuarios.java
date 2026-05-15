@@ -12,4 +12,6 @@ public interface DAOusuarios {
     public List<Usuarios> listar() throws Exception;
     public Usuarios getUsuarioById(int usuarioId) throws Exception;
     Usuarios obtenerPorId(int id) throws Exception;
+    public void actualizar(com.mycompany.modelos.Usuarios usuario) throws Exception;
+    public List<Usuarios> buscar(String texto) throws Exception;
 }

@@ -1,5 +1,7 @@
 
 package com.mycompany.vista;
+import com.company.interfas.DAOprestamos;
+import com.mycompany.bibio.DAOprestamosImpl;
 
 public class Prestamos extends javax.swing.JPanel {
 
@@ -41,6 +43,7 @@ public class Prestamos extends javax.swing.JPanel {
         bot_panel_prestar.setText("Prestar");
         bot_panel_prestar.setBorderPainted(false);
         bot_panel_prestar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bot_panel_prestar.addActionListener(this::bot_panel_prestarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,6 +104,28 @@ public class Prestamos extends javax.swing.JPanel {
     private void text_id_libroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_id_libroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_id_libroActionPerformed
+
+    private void bot_panel_prestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_panel_prestarActionPerformed
+        try {
+
+            DAOprestamos dao = new DAOprestamosImpl();
+
+            com.mycompany.modelos.Prestamos p = new com.mycompany.modelos.Prestamos();
+            p.setId_usuario(Integer.parseInt(text_folio.getText()));
+            p.setId_libro(Integer.parseInt(text_id_libro.getText()));
+            dao.registrar(p);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Prestamo realizado correctamente");
+
+            text_folio.setText("");
+            text_id_libro.setText("");
+
+        } catch(Exception e){
+
+            javax.swing.JOptionPane.showMessageDialog(this,"Error al realizar el prestamo");
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_bot_panel_prestarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

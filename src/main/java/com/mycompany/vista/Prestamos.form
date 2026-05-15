@@ -131,6 +131,9 @@
               <Color id="Cursor de Mano"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bot_panel_prestarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

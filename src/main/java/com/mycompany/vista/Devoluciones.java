@@ -1,5 +1,7 @@
 
 package com.mycompany.vista;
+import com.company.interfas.DAOprestamos;
+import com.mycompany.bibio.DAOprestamosImpl;
 
 public class Devoluciones extends javax.swing.JPanel {
 
@@ -16,9 +18,9 @@ public class Devoluciones extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         folio_prestar = new javax.swing.JLabel();
         id_libro_prestar = new javax.swing.JLabel();
-        text_folio = new javax.swing.JTextField();
+        text_folio_usuario = new javax.swing.JTextField();
         text_id_libro = new javax.swing.JTextField();
-        bot_panel_prestar = new javax.swing.JButton();
+        bot_devolver = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -31,16 +33,17 @@ public class Devoluciones extends javax.swing.JPanel {
 
         id_libro_prestar.setText("LIBRO ID ");
 
-        text_folio.addActionListener(this::text_folioActionPerformed);
+        text_folio_usuario.addActionListener(this::text_folio_usuarioActionPerformed);
 
         text_id_libro.addActionListener(this::text_id_libroActionPerformed);
 
-        bot_panel_prestar.setBackground(new java.awt.Color(0, 102, 102));
-        bot_panel_prestar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        bot_panel_prestar.setForeground(new java.awt.Color(255, 255, 255));
-        bot_panel_prestar.setText("Devolver");
-        bot_panel_prestar.setBorderPainted(false);
-        bot_panel_prestar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bot_devolver.setBackground(new java.awt.Color(0, 102, 102));
+        bot_devolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        bot_devolver.setForeground(new java.awt.Color(255, 255, 255));
+        bot_devolver.setText("Devolver");
+        bot_devolver.setBorderPainted(false);
+        bot_devolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bot_devolver.addActionListener(this::bot_devolverActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -60,8 +63,8 @@ public class Devoluciones extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(folio_prestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(106, 106, 106))
-                    .addComponent(text_folio)
-                    .addComponent(bot_panel_prestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(text_folio_usuario)
+                    .addComponent(bot_devolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(656, 656, 656))
         );
         jPanel1Layout.setVerticalGroup(
@@ -72,13 +75,13 @@ public class Devoluciones extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addComponent(folio_prestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(text_folio)
+                .addComponent(text_folio_usuario)
                 .addGap(45, 45, 45)
                 .addComponent(id_libro_prestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(text_id_libro)
                 .addGap(32, 32, 32)
-                .addComponent(bot_panel_prestar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addComponent(bot_devolver, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addGap(119, 119, 119))
         );
 
@@ -94,22 +97,47 @@ public class Devoluciones extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void text_folioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_folioActionPerformed
+    private void text_folio_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_folio_usuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text_folioActionPerformed
+    }//GEN-LAST:event_text_folio_usuarioActionPerformed
 
     private void text_id_libroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_id_libroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_id_libroActionPerformed
 
+    private void bot_devolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_devolverActionPerformed
+        try {
+
+        DAOprestamos dao = new DAOprestamosImpl();
+
+        com.mycompany.modelos.Prestamos p =
+                new com.mycompany.modelos.Prestamos();
+
+        p.setId_usuario(
+                Integer.parseInt(text_folio_usuario.getText())
+        );
+
+        p.setId_libro(
+                Integer.parseInt(text_id_libro.getText())
+        );
+
+        dao.modificar(p);
+        javax.swing.JOptionPane.showMessageDialog(this,"El usuario devolvió el libro con éxito","ÉXITO",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+    } catch(Exception e) {
+
+        javax.swing.JOptionPane.showMessageDialog(this,"No existe el prestamo correspondiente","ERROR",javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_bot_devolverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bot_panel_prestar;
+    private javax.swing.JButton bot_devolver;
     private javax.swing.JLabel folio_prestar;
     private javax.swing.JLabel id_libro_prestar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField text_folio;
+    private javax.swing.JTextField text_folio_usuario;
     private javax.swing.JTextField text_id_libro;
     // End of variables declaration//GEN-END:variables
 }

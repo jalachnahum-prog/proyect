@@ -1,10 +1,26 @@
 
 package com.mycompany.vista;
 
+import com.company.interfas.DAOlibros;
+import com.mycompany.bibio.DAOlibrosImpl;
+import com.mycompany.bibio.panel;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 public class Libros extends javax.swing.JPanel {
 
     public Libros() {
         initComponents();
+        cargarLibros();
+    }
+    private void cargarLibros(){
+        try{
+            DAOlibros dao = new DAOlibrosImpl();
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            dao.listar().forEach((u)->model.addRow(new Object[]{u.getId_libro(), u.getTitulo(), u.getFecha_publicacion(), u.getAutor(), u.getCategoria(), u.getEdicion(), u.getIdioma(), u.getPaginas(), u.getDescripcion(), u.getDisponibles(), u.getEjemplares()}));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -43,13 +59,10 @@ public class Libros extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Titulo", "Fecha", "Autor", "Categoria ", "Edicion", "Idioma", "Paginas", "Descripcion", "Ejemplos", "Disponible"
+                "ID", "Titulo", "Fecha", "Autor", "Categoria ", "Edicion", "Idioma", "Paginas", "Descripcion", "Disponibles", "ejemplares"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -143,19 +156,111 @@ public class Libros extends javax.swing.JPanel {
     }//GEN-LAST:event_text_buscar_librosActionPerformed
 
     private void bot_buscar_librosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_buscar_librosActionPerformed
-        // TODO add your handling code here:
+        try{
+
+        String texto = text_buscar_libros.getText().trim();
+
+        DAOlibros dao = new DAOlibrosImpl();
+
+        DefaultTableModel model =
+        (DefaultTableModel) jTable1.getModel();
+
+        // Limpiar tabla
+        model.setRowCount(0);
+
+        List<com.mycompany.modelos.Libros> lista;
+
+        if(texto.isEmpty()){
+
+            lista = dao.listar();
+
+        }else{
+
+            lista = dao.buscar(texto);
+        }
+
+        for(com.mycompany.modelos.Libros l : lista){
+
+            model.addRow(new Object[]{
+                l.getId_libro(),
+                l.getTitulo(),
+                l.getFecha_publicacion(),
+                l.getAutor(),
+                l.getCategoria(),
+                l.getEdicion(),
+                l.getIdioma(),
+                l.getPaginas(),
+                l.getDescripcion(),
+                l.getDisponibles(),
+                l.getEjemplares()
+            });
+        }
+
+    }catch(Exception e){
+
+        System.out.println(e.getMessage());
+    }
     }//GEN-LAST:event_bot_buscar_librosActionPerformed
 
     private void bot_nuevo_librosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_nuevo_librosActionPerformed
-        // TODO add your handling code here:
+        panel.ShowJPanel(new NuevoLibro());
     }//GEN-LAST:event_bot_nuevo_librosActionPerformed
 
     private void bot_editar_librosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_editar_librosActionPerformed
-        // TODO add your handling code here:
+         if(jTable1.getSelectedRow() > -1){
+            try{
+                int libroId =
+                (int)jTable1.getValueAt(jTable1.getSelectedRow(),0);
+                DAOlibros dao = new DAOlibrosImpl();
+                com.mycompany.modelos.Libros libro =
+                    dao.obtenerPorId(libroId);
+            panel.ShowJPanel(
+                    new NuevoLibro(libro)
+            );
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }else{
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Debes seleccionar un libro",
+                "AVISO",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+
+    }
     }//GEN-LAST:event_bot_editar_librosActionPerformed
 
     private void bot_borrar_librosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_borrar_librosActionPerformed
-        // TODO add your handling code here:
+        if(jTable1.getSelectedRow() == -1){
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Debes seleccionar los libros a eliminar",
+                "AVISO",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+             return;
+        }
+
+        DAOlibros dao = new DAOlibrosImpl();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+
+        int[] filas = jTable1.getSelectedRows();
+
+        for(int i = filas.length - 1; i >= 0; i--){
+            try{
+                int fila = filas[i];
+
+                dao.eliminar((int)jTable1.getValueAt(fila, 0));
+                model.removeRow(fila);
+
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
     }//GEN-LAST:event_bot_borrar_librosActionPerformed
 
 

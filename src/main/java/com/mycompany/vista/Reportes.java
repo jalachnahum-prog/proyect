@@ -1,11 +1,39 @@
 
 package com.mycompany.vista;
+import com.company.interfas.DAOprestamos;
+import com.mycompany.bibio.DAOprestamosImpl;
+import javax.swing.table.DefaultTableModel;
 
 public class Reportes extends javax.swing.JPanel {
 
     public Reportes() {
         initComponents();
+        cargarPrestamos();
     }
+    private void cargarPrestamos(){
+
+    try{
+
+        DAOprestamos dao = new DAOprestamosImpl();
+
+        DefaultTableModel model =
+        (DefaultTableModel) jTable1.getModel();
+
+        // limpiar tabla
+        model.setRowCount(0);
+
+        dao.listar().forEach((p) -> model.addRow(new Object[]{
+            p.getId_usuario(),
+            p.getId_libro(),
+            p.getFecha_prestamo(),
+            p.getFecha_devolucion()
+        }));
+
+    }catch(Exception e){
+
+        System.out.println(e.getMessage());
+    }
+}
 
 
     @SuppressWarnings("unchecked")
@@ -84,7 +112,7 @@ public class Reportes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        cargarPrestamos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

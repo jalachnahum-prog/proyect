@@ -30,24 +30,25 @@ public class Usuarios extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tex_usuar_buscar = new javax.swing.JTextField();
+        bot_buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        bot_nuev = new javax.swing.JButton();
         bot_editar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bot_eliminar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Usuarios ");
 
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        tex_usuar_buscar.addActionListener(this::tex_usuar_buscarActionPerformed);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Buscar");
+        bot_buscar.setBackground(new java.awt.Color(0, 102, 102));
+        bot_buscar.setForeground(new java.awt.Color(255, 255, 255));
+        bot_buscar.setText("Buscar");
+        bot_buscar.addActionListener(this::bot_buscarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -59,20 +60,20 @@ public class Usuarios extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setBackground(new java.awt.Color(0, 102, 102));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Nuevo");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        bot_nuev.setBackground(new java.awt.Color(0, 102, 102));
+        bot_nuev.setForeground(new java.awt.Color(255, 255, 255));
+        bot_nuev.setText("Nuevo");
+        bot_nuev.addActionListener(this::bot_nuevActionPerformed);
 
         bot_editar.setBackground(new java.awt.Color(0, 102, 102));
         bot_editar.setForeground(new java.awt.Color(255, 255, 255));
         bot_editar.setText("Editar");
         bot_editar.addActionListener(this::bot_editarActionPerformed);
 
-        jButton4.setBackground(new java.awt.Color(0, 102, 102));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Borrar");
-        jButton4.addActionListener(this::jButton4ActionPerformed);
+        bot_eliminar.setBackground(new java.awt.Color(0, 102, 102));
+        bot_eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        bot_eliminar.setText("Borrar");
+        bot_eliminar.addActionListener(this::bot_eliminarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,16 +90,16 @@ public class Usuarios extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tex_usuar_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))))
+                                .addComponent(bot_buscar))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(273, 273, 273)
-                        .addComponent(jButton2)
+                        .addComponent(bot_nuev)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bot_editar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)))
+                        .addComponent(bot_eliminar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -108,18 +109,18 @@ public class Usuarios extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(bot_buscar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tex_usuar_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(bot_nuev)
                     .addComponent(bot_editar)
-                    .addComponent(jButton4))
+                    .addComponent(bot_eliminar))
                 .addGap(45, 45, 45))
         );
 
@@ -137,13 +138,13 @@ public class Usuarios extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tex_usuar_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tex_usuar_buscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tex_usuar_buscarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bot_nuevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_nuevActionPerformed
         panel.ShowJPanel(new NuevoUsuario());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bot_nuevActionPerformed
 
     private void bot_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_editarActionPerformed
          if(jTable1.getSelectedRow() > -1){
@@ -173,29 +174,91 @@ public class Usuarios extends javax.swing.JPanel {
     }
     }//GEN-LAST:event_bot_editarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void bot_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_eliminarActionPerformed
+
+        if(jTable1.getSelectedRow() == -1){
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Debes seleccionar los usuarios a eliminar",
+                "AVISO",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+             return;
+        }
+
         DAOusuarios dao = new DAOusuariosImpl();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for(int i : jTable1.getSelectedRows()){
+
+
+        int[] filas = jTable1.getSelectedRows();
+
+        for(int i = filas.length - 1; i >= 0; i--){
             try{
-                dao.eliminar((int)jTable1.getValueAt(i, 0));
-                model.removeRow(i);
-               }catch(Exception e){
+                int fila = filas[i];
+
+                dao.eliminar((int)jTable1.getValueAt(fila, 0));
+                model.removeRow(fila);
+
+            }catch(Exception e){
                 System.out.println(e.getMessage());
             }
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_bot_eliminarActionPerformed
+
+    private void bot_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bot_buscarActionPerformed
+        
+    try{
+
+        String texto = tex_usuar_buscar.getText().trim();
+
+        DAOusuarios dao = new DAOusuariosImpl();
+
+        DefaultTableModel model =
+        (DefaultTableModel) jTable1.getModel();
+
+        // Limpiar tabla
+        model.setRowCount(0);
+
+        List<com.mycompany.modelos.Usuarios> lista;
+
+        if(texto.isEmpty()){
+
+            lista = dao.listar();
+
+        }else{
+
+            lista = dao.buscar(texto);
+        }
+
+        for(com.mycompany.modelos.Usuarios u : lista){
+
+            model.addRow(new Object[]{
+                u.getId_usuario(),
+                u.getNombres(),
+                u.getApellido_paterno(),
+                u.getApellido_materno(),
+                u.getDomicilio(),
+                u.getTelefono()
+            });
+        }
+
+    }catch(Exception e){
+
+        System.out.println(e.getMessage());
+    }
+    }//GEN-LAST:event_bot_buscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bot_buscar;
     private javax.swing.JButton bot_editar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton bot_eliminar;
+    private javax.swing.JButton bot_nuev;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField tex_usuar_buscar;
     // End of variables declaration//GEN-END:variables
 }
